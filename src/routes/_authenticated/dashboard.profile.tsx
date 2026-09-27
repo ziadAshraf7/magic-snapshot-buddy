@@ -31,7 +31,7 @@ function ProfilePage() {
       .eq("id", user.id)
       .maybeSingle()
       .then(({ data }) => {
-        setFullName(data?.full_name ?? (user.user_metadata?.full_name as string) ?? "");
+        setFullName(data?.full_name ?? (user.user_metadata?.["full_name"] as string) ?? "");
       });
   }, [user]);
 
