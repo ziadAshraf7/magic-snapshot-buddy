@@ -1,6 +1,9 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useSession } from "@/lib/auth";
 
 const nav = [
   { to: "/projects", label: "Projects" },
@@ -13,6 +16,16 @@ const nav = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const { session, loading } = useSession();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/login", replace: true });
+  }
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
@@ -38,6 +51,25 @@ export function SiteHeader() {
           <Link to="/contact" className="btn-ghost hidden lg:inline-flex">
             Contact
           </Link>
+          {!loading &&
+            (session ? (
+              <>
+                <Link to="/dashboard" className="btn-ghost hidden lg:inline-flex">
+                  Dashboard
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="label-caps hidden text-muted-foreground transition-colors hover:text-accent lg:inline-flex"
+                >
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <Link to="/login" className="btn-ghost hidden lg:inline-flex">
+                Sign in
+              </Link>
+            ))}
           <button
             type="button"
             aria-label="Toggle menu"
