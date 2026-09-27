@@ -66,7 +66,7 @@ export function SiteHeader() {
                 </button>
               </>
             ) : (
-              <Link to="/login" className="btn-ghost hidden lg:inline-flex">
+              <Link to="/login" search={{ redirect: undefined }} className="btn-ghost hidden lg:inline-flex">
                 Sign in
               </Link>
             ))}
@@ -104,7 +104,7 @@ export function SiteHeader() {
                   Dashboard
                 </Link>
               ) : (
-                <Link to="/login" onClick={() => setOpen(false)} className="label-caps text-accent">
+                <Link to="/login" search={{ redirect: undefined }} onClick={() => setOpen(false)} className="label-caps text-accent">
                   Sign in
                 </Link>
               ))}
