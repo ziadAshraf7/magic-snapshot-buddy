@@ -14,21 +14,207 @@ export type Database = {
   }
   public: {
     Tables: {
+      faqs: {
+        Row: {
+          answer: string
+          category: string
+          created_at: string
+          id: string
+          is_published: boolean
+          question: string
+          sort_order: number
+        }
+        Insert: {
+          answer?: string
+          category?: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          question: string
+          sort_order?: number
+        }
+        Update: {
+          answer?: string
+          category?: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          question?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
+          email: string
           full_name: string
           id: string
+          is_active: boolean
         }
         Insert: {
           created_at?: string
+          email?: string
           full_name?: string
           id: string
+          is_active?: boolean
         }
         Update: {
           created_at?: string
+          email?: string
           full_name?: string
           id?: string
+          is_active?: boolean
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          after_images: string[]
+          before_images: string[]
+          category: string
+          created_at: string
+          description: string
+          duration: string
+          featured: boolean
+          gallery: string[]
+          hero_image: string
+          id: string
+          location: string
+          services: string[]
+          title: string
+        }
+        Insert: {
+          after_images?: string[]
+          before_images?: string[]
+          category?: string
+          created_at?: string
+          description?: string
+          duration?: string
+          featured?: boolean
+          gallery?: string[]
+          hero_image?: string
+          id?: string
+          location?: string
+          services?: string[]
+          title: string
+        }
+        Update: {
+          after_images?: string[]
+          before_images?: string[]
+          category?: string
+          created_at?: string
+          description?: string
+          duration?: string
+          featured?: boolean
+          gallery?: string[]
+          hero_image?: string
+          id?: string
+          location?: string
+          services?: string[]
+          title?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          created_at: string
+          description_en: string
+          description_fr: string
+          excerpt_en: string
+          excerpt_fr: string
+          id: string
+          image_url: string
+          is_active: boolean
+          service_type: string
+          slug: string
+          sort_order: number
+          title_en: string
+          title_fr: string
+        }
+        Insert: {
+          created_at?: string
+          description_en?: string
+          description_fr?: string
+          excerpt_en?: string
+          excerpt_fr?: string
+          id?: string
+          image_url?: string
+          is_active?: boolean
+          service_type?: string
+          slug: string
+          sort_order?: number
+          title_en: string
+          title_fr?: string
+        }
+        Update: {
+          created_at?: string
+          description_en?: string
+          description_fr?: string
+          excerpt_en?: string
+          excerpt_fr?: string
+          id?: string
+          image_url?: string
+          is_active?: boolean
+          service_type?: string
+          slug?: string
+          sort_order?: number
+          title_en?: string
+          title_fr?: string
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          author_name: string
+          created_at: string
+          featured: boolean
+          id: string
+          project: string
+          quote: string
+          rating: number
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          author_name: string
+          created_at?: string
+          featured?: boolean
+          id?: string
+          project?: string
+          quote: string
+          rating?: number
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          author_name?: string
+          created_at?: string
+          featured?: boolean
+          id?: string
+          project?: string
+          quote?: string
+          rating?: number
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
         }
         Relationships: []
       }
@@ -37,10 +223,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -167,6 +359,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
