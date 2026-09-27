@@ -22,7 +22,7 @@ function DashboardLayout() {
     await queryClient.cancelQueries();
     queryClient.clear();
     await supabase.auth.signOut();
-    navigate({ to: "/login", replace: true });
+    navigate({ to: "/login", search: { redirect: undefined }, replace: true });
   }
 
   return (
@@ -31,7 +31,7 @@ function DashboardLayout() {
         <div>
           <p className="eyebrow">Client Area</p>
           <h1 className="mt-4 font-display text-5xl">
-            Hello{user?.user_metadata?.full_name ? `, ${user.user_metadata.full_name}` : ""}.
+            Hello{user?.user_metadata?.["full_name"] ? `, ${user.user_metadata["full_name"]}` : ""}.
           </h1>
         </div>
         <button type="button" onClick={handleSignOut} className="btn-ghost">

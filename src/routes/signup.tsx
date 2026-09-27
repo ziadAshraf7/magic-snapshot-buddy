@@ -5,7 +5,7 @@ import { GoldDivider } from "@/components/ui-bits";
 
 export const Route = createFileRoute("/signup")({
   validateSearch: (search: Record<string, unknown>) => ({
-    redirect: typeof search.redirect === "string" ? search.redirect : undefined,
+    redirect: typeof search["redirect"] === "string" ? search["redirect"] : undefined,
   }),
   head: () => ({
     meta: [
@@ -77,7 +77,7 @@ function SignupPage() {
             We sent a confirmation link to <span className="text-foreground">{email}</span>. Click
             it to activate your account, then sign in.
           </p>
-          <Link to="/login" className="btn-gold mt-10 inline-flex">
+          <Link to="/login" search={{ redirect: undefined }} className="btn-gold mt-10 inline-flex">
             Go to sign in
           </Link>
         </div>
