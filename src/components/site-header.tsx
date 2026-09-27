@@ -94,6 +94,20 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
+            {!loading &&
+              (session ? (
+                <Link
+                  to="/dashboard"
+                  onClick={() => setOpen(false)}
+                  className="label-caps text-accent"
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                <Link to="/login" onClick={() => setOpen(false)} className="label-caps text-accent">
+                  Sign in
+                </Link>
+              ))}
           </div>
         </nav>
       )}
