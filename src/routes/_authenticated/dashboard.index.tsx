@@ -34,14 +34,14 @@ function DashboardHome() {
             <div className="aspect-[4/3] overflow-hidden">
               <img
                 src={p.image}
-                alt={p.title}
+                alt={p.name}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
             <div className="flex items-center justify-between p-5">
               <div>
                 <p className="label-caps text-accent">{p.category}</p>
-                <p className="mt-2 font-display text-xl">{p.title}</p>
+                <p className="mt-2 font-display text-xl">{p.name}</p>
               </div>
               <ArrowRight size={18} className="text-muted-foreground transition-colors group-hover:text-accent" />
             </div>
