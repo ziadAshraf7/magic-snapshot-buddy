@@ -64,7 +64,7 @@ function ContactPage() {
             <select defaultValue="" className={field}>
               <option value="" disabled>Service of interest</option>
               {services.map((s) => (
-                <option key={s.slug} value={s.slug}>{s.name}</option>
+                <option key={s.slug} value={s.slug}>{s.title}</option>
               ))}
             </select>
             <textarea required rows={5} placeholder="Tell us about the project" className={`${field} sm:col-span-2`} />
